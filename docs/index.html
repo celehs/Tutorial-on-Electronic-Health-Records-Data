@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2022-09-08">
+
+<title>Tutorial on Electronic Health Records Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Chapter2.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Tutorial on Electronic Health Records Data</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tutorial on Electronic Health Records Data</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Ontology and Unified Medical Language System (UMLS)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Chapter 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ontology-and-unified-medical-language-system-umls" id="toc-ontology-and-unified-medical-language-system-umls" class="nav-link active" data-scroll-target="#ontology-and-unified-medical-language-system-umls"> <span class="header-section-number">1</span> Ontology and Unified Medical Language System (UMLS)</a>
+  <ul class="collapse">
+  <li><a href="#concepts-and-relations" id="toc-concepts-and-relations" class="nav-link" data-scroll-target="#concepts-and-relations"> <span class="header-section-number">1.1</span> Concepts and Relations</a></li>
+  <li><a href="#the-necessity-of-a-unified-coding-system" id="toc-the-necessity-of-a-unified-coding-system" class="nav-link" data-scroll-target="#the-necessity-of-a-unified-coding-system"> <span class="header-section-number">1.2</span> The necessity of a Unified Coding System</a></li>
+  </ul></li>
+  <li><a href="#umls-unified-medical-language-system" id="toc-umls-unified-medical-language-system" class="nav-link" data-scroll-target="#umls-unified-medical-language-system"> <span class="header-section-number">2</span> UMLS: Unified Medical Language System</a>
+  <ul class="collapse">
+  <li><a href="#concepts-as-cuis-in-umls" id="toc-concepts-as-cuis-in-umls" class="nav-link" data-scroll-target="#concepts-as-cuis-in-umls"> <span class="header-section-number">2.0.1</span> Concepts as CUIs in UMLS</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Tutorial on Electronic Health Records Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 8, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="ontology-and-unified-medical-language-system-umls" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Ontology and Unified Medical Language System (UMLS)</h1>
+<p>Expert knowledge lies at the core of a medical intelligence system. For example, a doctor would know the proper questions to ask a patient if they want to diagnose a rheumatoid arthritis instead of a simple joint injury. This is also what we expect a medical question answering system would be able to do. A common way to equip machines with knowledge is through a knowledge graph composed of concepts and relations. As the opening part of this tutorial, this section introduces fundamental infrastructures in biomedical informatics, i.e., medical concepts and relations between them, along with the available resources.</p>
+<section id="concepts-and-relations" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="concepts-and-relations"><span class="header-section-number">1.1</span> Concepts and Relations</h2>
+<p>For beginners in biomedical informatics, it is important to figure out the meaning of <em>concept</em> and <em>relation</em>.</p>
+<p>Let’s look at an example in our daily life. One day one of your friend feels ill and goes to see a doctor. They say <em>I have a stomachache!</em> <em>It’s killing me!</em> Then, the doctor tries to comfort them by saying <em>Your stomach pain will be okay. It looks like a minor stomach disorder.</em> In this case, we got three medical terms: <em>stomachache</em>, <em>stomach pain</em>, and <em>stomach disorder</em>. Moreover, we can find some connections between these terms:</p>
+<ol type="1">
+<li><p>The terms <em>stomachache</em> and <em>stomach pain</em> refer to the same syndrome (or concept).</p></li>
+<li><p>The disease <em>stomach disorder</em> may cause <em>stomachache</em></p></li>
+</ol>
+<p>First, it is obvious that <em>stomachache</em> and <em>stomach pain</em> refer to the same <strong>concept</strong>. Furthermore, with the exception of disease and symptom, every abstract medical entity can be regarded as a concept. They can be procedures, medicine, disorders, mental condition, etc</p>
+<p>Second, there is a <strong>relation</strong> called <em>may_cause</em> between <em>stomach disorder</em> and <em>stomachache</em>. This enables the doctor to make a diagnosis for your friend according to their symptoms and the relation between symptoms and diseases. Besides, there are a lot of other relations between concepts. For instance, Aspirin could relieve physical pain; Hypertensive disease may cause heart failure. These relations are crucial to biomedical informatics because they can reveal to us how medical concepts interact with each other.</p>
+</section>
+<section id="the-necessity-of-a-unified-coding-system" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="the-necessity-of-a-unified-coding-system"><span class="header-section-number">1.2</span> The necessity of a Unified Coding System</h2>
+<p>In Section 1.1, we take an example from our daily life to help you understand the meaning of concept and relation. However, biomedical bioinformatics is an exclusively practical subject, derives its resources from various sources, including but not restricted to textbooks, Wikipedia, and electronic health records (EHR). There are thus great challenges to extracting concepts and relations from the resources, as they not only vary in text style and quality, but also in formats and structures. Therefore, we need a giant <strong>dictionary</strong> to help us deal with these problems.</p>
+<p>In the example from the last section, it is obvious that stomachache and stomach pain refer to a same concept. However, if a researcher is dealing with EHRs from 10,000 patients, finding out all the mentions of the same concept will be arduous work because doctors may use various terms to refer to the same disease in their records such as type 2 diabetes, adult-onset diabetes, and diabetes mellitus type 2. Nonetheless, if you have a dictionary containing all terms under the same concept, you can find all these mentions easily by direct matching.</p>
+<p>Moreover, in the last section, we mentioned that doctors can make diagnoses according to relations between symptoms and diseases. Similarly, If we can gather large quantities of relations between medical concepts, it will be a great help to many fields of biomedical informatics such as autodiagnosis and relation extraction. Therefore, we hope the dictionary also contains the relations between its concepts.</p>
+<p>Do we have such a comprehensive dictionary? Of course! In the field of biomedical informatics, we call the giant dictionary a <strong>unified coding system</strong>.</p>
+</section>
+</section>
+<section id="umls-unified-medical-language-system" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> UMLS: Unified Medical Language System</h1>
+<p>UMLS (Unified Medical Language System) [1] is a large language system that unifies medical concept coding, typing, relations between medical concepts, etc. It is not only a standard, but also a large database. In brief, the UMLS is a comprehensive dictionary containing considerable medical terms and relations between them.</p>
+<p>You can download data and consult the documentation on the UMLS website <sup>1</sup> .</p>
+<section id="concepts-as-cuis-in-umls" class="level3" data-number="2.0.1">
+<h3 data-number="2.0.1" class="anchored" data-anchor-id="concepts-as-cuis-in-umls"><span class="header-section-number">2.0.1</span> Concepts as CUIs in UMLS</h3>
+<p>It is desirable to have a unique identifier for each concept. In the UMLS, the identifier is called <strong>CUI (Unique Concept Identifier)</strong>. The CUI consists of a C followed by several digits such as C0021400 (Influenza).</p>
+<p>As we mentioned in the last section, each concept usually has more than one name or aliases. In the UMLS, we refer to these names or aliases as <strong>String</strong>. Thus, we can say that each CUI usually has more than one string.</p>
+<p>Among all strings under the same concept, there is always a preferred string which is seen as a <strong>preferred name</strong> of the concept. Researchers usually use preferred names to refer to Concepts because CUIs are difficult to recognize by humans.</p>
+<p>All of the CUIs and strings are defined by table <strong>MRCONSO</strong> in the UMLS which contains 4,536,653 concepts with 16,543,671 strings in total. Table 2.1 is an example of a concept with its strings.</p>
+<div id="tbl-letters" class="anchored">
+<table class="table">
+<caption>Table 2.1: An example of CUIs and strings in UMLS</caption>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 41%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Concept (CUI)</th>
+<th style="text-align: center;">Preferred string of concept</th>
+<th style="text-align: center;">All strings of concept</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>C0004238</strong></td>
+<td style="text-align: center;"><strong>Atrial Fibrillation</strong></td>
+<td style="text-align: center;"><p>Atrial Fibrillation</p>
+<p>Atrial Fibrillations</p>
+<p>Auricular Fibrillation</p>
+<p>Auricular Fibrillations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In addition to CUIs and strings, MRCONSO also provides other information about medical terms, such as language, source vocabularies, types, etc. The MRCONSO is a table of the UMLS, and here <sup>2</sup> is the description of all columns of the table. Here, we only introduce some of them</p>
+<ol type="1">
+<li><p><strong>CUI</strong>: Unique identifier for concept</p></li>
+<li><p><strong>LAT</strong>: Language of the term</p></li>
+<li><p><strong>STR</strong>: String of the term</p></li>
+<li><p><strong>SUPPRESS</strong>: Suppressible flag, indicating whether the entry is obsolete</p></li>
+</ol>
+<p>With the entries in MRCONSO, we can extract all strings under the same CUI easily.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Chapter2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Chapter 2</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
