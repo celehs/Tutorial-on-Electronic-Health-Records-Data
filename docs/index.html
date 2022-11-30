@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2022-11-08">
+
+<title>Tutorial on Electronic Health Records Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Tutorial on Electronic Health Records Data</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tutorial on Electronic Health Records Data</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"> <span class="header-section-number">1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#ehr-data-elements-and-coding-systems" id="toc-ehr-data-elements-and-coding-systems" class="nav-link" data-scroll-target="#ehr-data-elements-and-coding-systems"> <span class="header-section-number">1.1</span> EHR Data elements and Coding Systems</a>
+  <ul class="collapse">
+  <li><a href="#disease-codes" id="toc-disease-codes" class="nav-link" data-scroll-target="#disease-codes"> <span class="header-section-number">1.1.1</span> Disease codes</a></li>
+  <li><a href="#medication-codes" id="toc-medication-codes" class="nav-link" data-scroll-target="#medication-codes"> <span class="header-section-number">1.1.2</span> Medication codes</a></li>
+  <li><a href="#procedure-codes" id="toc-procedure-codes" class="nav-link" data-scroll-target="#procedure-codes"> <span class="header-section-number">1.1.3</span> Procedure codes</a></li>
+  <li><a href="#laboratory-codes" id="toc-laboratory-codes" class="nav-link" data-scroll-target="#laboratory-codes"> <span class="header-section-number">1.1.4</span> Laboratory codes</a></li>
+  </ul></li>
+  <li><a href="#aggregation-of-codified-data" id="toc-aggregation-of-codified-data" class="nav-link" data-scroll-target="#aggregation-of-codified-data"> <span class="header-section-number">1.2</span> Aggregation of codified data</a></li>
+  <li><a href="#ontology-and-unified-medical-language-system-umls" id="toc-ontology-and-unified-medical-language-system-umls" class="nav-link" data-scroll-target="#ontology-and-unified-medical-language-system-umls"> <span class="header-section-number">1.3</span> Ontology and Unified Medical Language System (UMLS)</a>
+  <ul class="collapse">
+  <li><a href="#sec:1.1" id="toc-sec:1.1" class="nav-link" data-scroll-target="#sec\:1.1"> <span class="header-section-number">1.3.1</span> Concepts and Relations</a></li>
+  <li><a href="#the-necessity-of-a-unified-coding-system" id="toc-the-necessity-of-a-unified-coding-system" class="nav-link" data-scroll-target="#the-necessity-of-a-unified-coding-system"> <span class="header-section-number">1.3.2</span> The necessity of a unified coding system</a></li>
+  <li><a href="#umls-unified-medical-language-system" id="toc-umls-unified-medical-language-system" class="nav-link" data-scroll-target="#umls-unified-medical-language-system"> <span class="header-section-number">1.3.3</span> UMLS: Unified Medical Language System</a></li>
+  <li><a href="#concepts-as-cuis-in-umls" id="toc-concepts-as-cuis-in-umls" class="nav-link" data-scroll-target="#concepts-as-cuis-in-umls"> <span class="header-section-number">1.3.4</span> Concepts as CUIs in UMLS</a></li>
+  <li><a href="#relations-in-umls" id="toc-relations-in-umls" class="nav-link" data-scroll-target="#relations-in-umls"> <span class="header-section-number">1.3.5</span> Relations in UMLS</a></li>
+  <li><a href="#semantic-types-in-umls" id="toc-semantic-types-in-umls" class="nav-link" data-scroll-target="#semantic-types-in-umls"> <span class="header-section-number">1.3.6</span> Semantic Types in UMLS</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Tutorial on Electronic Health Records Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 8, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>An electronic health record (EHR) is a digital record of a patient’s interactions with a healthcare system. In the last decade, the worldwide adoption of EHRs has skyrocketed. In the United States, the $19 billion Health Information Technology for Economic and Clinical Health (HITECH) Act of 2009 incentivized healthcare institutions to implement EHR systems capable of improving the quality, safety, and efficiency of patient care. As a result, EHR usage in the US has more than quadrupled since 2009. Among their many advantages, EHR systems support comprehensive healthcare documentation, enhanced data security, improved healthcare process management, and integrated medical billing. Additionally, interoperable EHR systems facilitate information exchange and streamlined communication across various healthcare providers involved in a patient’s care.</p>
+<p>Beyond their uses at the point of care, EHRs have simultaneously transformed biomedical research. In contrast to data collected from traditional clinical studies such as randomized controlled trials, EHR data is readily accessible and available for large and diverse populations. The data is also collected over long periods of time and contains detailed timestamped information on disease diagnoses, laboratory tests, medical procedures, prescriptions, and clinical notes. The depth and volume of EHR data has in turn created unprecedented opportunities for research, including the development of artificial intelligence (AI) systems for rapid and more inclusive clinical trials recruitment <span class="citation" data-cites="realdata-ai">(<a href="references.html#ref-realdata-ai" role="doc-biblioref">Liu R 2021</a>)</span>, the formation of international research networks focusing on real-time studies of the COVID-19 pandemic<span class="citation" data-cites="4CE">(<a href="references.html#ref-4CE" role="doc-biblioref">Brat 2020</a>)</span>, and the introduction of real-world prediction models for sepsis that can identify the condition prior to symptom onset.</p>
+<p>In spite of the exciting and expanding uses of EHR data, there are numerous known challenges that arise in its analysis. Fundamentally, EHR data is not designed for research purposes. It is therefore complex in its structure and prone to quality issues such as missing data, erroneous entries, and duplicate data. A substantial amount of work is required to process and transform EHR data before it can be safely and reliably used for a biomedical application.</p>
+<p>In this tutorial, we provide a detailed introduction to the structure of EHR data and the analysis workflow required to prepare “research ready” data. We also include a detailed example workflow with the MIMIC-IV (Medical Information Mart for Intensive Care) intensive care EHR database that is openly available to the research community.</p>
+<div id="fig:rxnav" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/intro.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">An overview of Electronic Health Record System and its usage</figcaption><p></p>
+</figure>
+</div>
+<section id="ehr-data-elements-and-coding-systems" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="ehr-data-elements-and-coding-systems"><span class="header-section-number">1.1</span> EHR Data elements and Coding Systems</h2>
+<p>Some of the major data elements/concepts stored within an EHR system include patient identifiers, demographics, diagnoses, lab test results, scan results, medications and procedures performed. We will be introducing some of these data elements and certain standard coding systems used to represent them.</p>
+<section id="disease-codes" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="disease-codes"><span class="header-section-number">1.1.1</span> Disease codes</h3>
+<p>Disease codes encode diseases, symptoms, and phenotypes into a unique code. ICD (International Classification of Diseases) codes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and Phecodes<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> are examples of disease codes. ICD codes are typically used in a health care setting to code diagnoses made during a patient encounter. However, ICD codes are too detailed to be used for research purposes. Phecodes solves this problem by grouping relevant ICD codes into clinical meaningful phenotypes.</p>
+<p><strong>ICD Codes</strong></p>
+<p>The International Classification of Diseases (ICD) codes contain codes for diseases, symptoms, findings, and injuries that is maintained by the World Health Organization (WHO). ICD codes are used to record medical findings in a standardized format in EHRs and to track global morbidity and mortality. Different countries and different hospitals may use different versions of ICD codes. WHO periodically releases new versions of ICD codes, among which ICD-9 and ICD-10 are relevant to EHR data. The United States uses an extended version of ICD called the “clinical modification” (CM), e.g.&nbsp;ICD-9-CM. ICD-10-CM has over five times the number of diagnosis codes as ICD-9-CM.</p>
+<p><strong>Phecodes</strong></p>
+<p>Closely related to the ICD codes, Phecodes are phenotyping codes that group various ICD codes into useful phenotypes. ICD codes are very detailed codes, which can be manually rolled up to phecodes <span class="citation" data-cites="icd9-phecode icd10-phecode">(<a href="references.html#ref-icd9-phecode" role="doc-biblioref">Wei et al. 2017</a>; <a href="references.html#ref-icd10-phecode" role="doc-biblioref">Wu et al. 2019</a>)</span>. Phecodes version 1.2 condenses roughly 15500 ICD-9-CM codes and 90000 ICD-10-CM codes into 1867 phecodes. ICD codes and phecodes create a certain hierarchy<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> from general phenotype to detailed findings. An example of this hierarchy is shown in Figure <a href="#fig:phecode_hier" data-reference-type="ref" data-reference="fig:phecode_hier">1</a>.A complete ICD-Phecode system includes ICD codes, ICD strings, corresponding phecodes and phenotypes, and corresponding excluded phecodes range and phenotype. Table <a href="#phecode" data-reference-type="ref" data-reference="phecode">[phecode]</a> shows an example of the ICD-Phecode system.</p>
+<div id="fig:phecode_hier" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/phecode_hierarchy.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">An example of the ICD-Phecode hierarchy. The most general concept (root) is encoded as an integer in the phecode system, e.g.&nbsp;008. The second level is encoded as a decimal with the same integer part as the root and one digit after the decimal point, while the third level has two digits after the decimal point. Each phecode groups a part of ICD codes.</figcaption><p></p>
+</figure>
+</div>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ICD-9</th>
+<th>ICD-9 String</th>
+<th>Phecode</th>
+<th>Phenotype</th>
+<th>Excl Phecodes</th>
+<th>Excl Phenotypes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>250</td>
+<td>Diabetes mellitus</td>
+<td>250</td>
+<td>Diabetes mellitus</td>
+<td>249-250.99</td>
+<td>DIABETES</td>
+</tr>
+<tr class="even">
+<td>250.1</td>
+<td>Diabetes with ketoacidosis</td>
+<td>250</td>
+<td>Diabetes mellitus</td>
+<td>249-250.99</td>
+<td>DIABETES</td>
+</tr>
+<tr class="odd">
+<td>250.33</td>
+<td>Diabetes mellitus with other coma...</td>
+<td>250.1</td>
+<td>Type 1 diabetes</td>
+<td>249-250.99</td>
+<td>DIABETES</td>
+</tr>
+<tr class="even">
+<td>250.13</td>
+<td>Type I diabetes mellitus [juvenile type]...</td>
+<td>250.11</td>
+<td>Type 1 diabetes with ketoacidosis</td>
+<td>249-250.99</td>
+<td>DIABETES</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="medication-codes" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="medication-codes"><span class="header-section-number">1.1.2</span> Medication codes</h3>
+<p>Medication codes encode drug products into unique codes and are used to record prescribed/administered medications within EHR systems.. Typical medication coding systems include RxNorm[^index-4] and National Drug Code (NDC)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Health care systems can also have their own local medication codes. Medication codes [^index-4]: https://www.nlm.nih.gov/research/umls/rxnorm/index.html</p>
+<p><strong>RxNorm</strong></p>
+<p>RxNorm, produced by The National Library of Medicine (NLM), provides normalized names for clinical drugs and links its names to many of the drug vocabularies commonly used in pharmacy management and drug interaction software, including those of First Databank, Micromedex, and Gold Standard Drug Database. RxNorm provides a set of codes (RxCUI) for clinical drugs, which are the combination of active ingredients, dose form, and strength of a drug. For example, the RxCUI for <em>ciprofloxacin 500 mg 24-hour extended-release tablet</em> (the generic name for Cipro XR 500 mg) is RX10359383, regardless of brand or packaging. RxNorm is also a hierarchical code, with relationships like “has_precise_ingredient”, “has_ingredient”, “has_part”, and “consists_of”.</p>
+<p>RxNorm codes can be also browsed through <a href="https://mor.nlm.nih.gov/RxNav/">RxNav</a>, which offers a visualized browser for each RxNorm code. Examples of RxNav is shown in Figure <a href="#fig:rxnav" data-reference-type="ref" data-reference="fig:rxnav">4</a>.</p>
+<div id="fig:rxnav" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/rxnav.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">An example of RxNav for Ibuprofen. The browser shows properties like ingredients and clinical drug components of Ibuprofen. RxNav provides an interactive tool for RxNorm.</figcaption><p></p>
+</figure>
+</div>
+<div id="tab:rxnormtype">
+<table class="table">
+<caption>File types of RxNorm.</caption>
+<colgroup>
+<col style="width: 54%">
+<col style="width: 45%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Concepts, Concept Names, and their sources</td>
+<td style="text-align: left;">RXNCONSO.RRF</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Attributes</td>
+<td style="text-align: left;">RXNSAT.RRF, RXNSTY.RRF</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Relationships</td>
+<td style="text-align: left;">RXNREL.RRF</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Data about RxNorm</td>
+<td style="text-align: left;">RXNDOC.RRF, RXNSAB.RRF, RXNCUI.RRF</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Archive Data</td>
+<td style="text-align: left;">RXNATOMARCHIVE.RRF</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Concept Changes Tracking Data</td>
+<td style="text-align: left;">RXNCUICHANGES.RRF</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>NDC</strong></p>
+<p>The National Drug Code (NDC) is a unique product identifier used in the United States for drugs intended for human use. It’s published by U.S. Food and Drug Administration (FDA). Through NDC, drugs are identified and reported using a unique, three-segment number which serves as the FDA’s identifier for drugs.</p>
+<p>The first segment, the labeler code, is 4, 5 or 6 digits long and identifies the labeler such as the drug manufacturer, repackager, or distributer. The second segment, the product code, is 3 or 4 digits long and identifies a specific strength, dosage form, and formulation for a particular firm. The third segment, the package code, is 1 or 2 digits long and identifies package forms and sizes. For example, the product NDC of <em>Ibuprofen</em> produced by Granules India Limited is 62207-0356.</p>
+</section>
+<section id="procedure-codes" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="procedure-codes"><span class="header-section-number">1.1.3</span> Procedure codes</h3>
+<p>Procedure codes identify specific surgical, medical, or diagnostic procedures. Typical procedure codes include Current Procedural Terminology (CPT) and ICD-10 Procedure Coding System (ICD-10-PCS). Procedure codes are used in billing, EHR, and insurance.</p>
+<p><strong>CPT</strong></p>
+<p>The Current Procedural Terminology (CPT) code set is a procedural code set developed by the American Medical Association (AMA). The CPT code set describes medical, surgical, and diagnostic procedures for administrative, financial, and analytical purposes. There are three types of CPT codes. Category 1 are 5-digit codes that cover evaluation and management, anesthesiology, surgery, radiology, pathology and laboratory, and medicine. These are the most widely used CPT codes. Category 2 are clinical laboratory services and category 3 are emerging technologies, services, and procedures. Examples of CPT codes are listed in Table <a href="#tab:cpt" data-reference-type="ref" data-reference="tab:cpt">5</a>.</p>
+<div id="tab:cpt">
+<table class="table">
+<caption>Examples of CPT codes.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">CPT</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">3120F</td>
+<td style="text-align: left;">12-LEAD ECG PERFORMED</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4030F</td>
+<td style="text-align: left;">LONG-TERM OXYGEN THERAPY PRESCRIBED</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0575F</td>
+<td style="text-align: left;">HIV RNA CONTROL PLAN OF CARE DOCD</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>ICD-10-PCS</strong></p>
+<p>The ICD-10 Procedure Coding System (ICD-10-PCS) is an international system of medical classification used for procedural coding. ICD-9-CM contains a procedure classification while ICD-10-CM does not. ICD-10-PCS is the procedure classification for ICD-10. Each ICD-10-PCS code consists of seven alphanumeric characters. The first character is the ‘section’. The second through seventh characters mean different things in each section. Each character can be any of 34 possible values; the ten digits 0-9 and the 24 letters A-H, J-N and P-Z may be used in each character. The letters O and I are excluded to avoid confusion with the numbers 0 and 1. There are no decimals in ICD-10-PCS. Of the 72,081 codes in ICD-10-PCS, 62,022 are in the first section, “Medical and surgical”. Detailed descriptions of the sections can be found in <a href="https://en.wikipedia.org/wiki/ICD-10_Procedure_Coding_System#Section_structure">Wiki</a>. For example, 07Q70ZZ is the code for <em>Repair Thorax Lymphatic, Open Approach</em>.</p>
+</section>
+<section id="laboratory-codes" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="laboratory-codes"><span class="header-section-number">1.1.4</span> Laboratory codes</h3>
+<p>Laboratory codes identify medical laboratory observations. Logical Observation Identifier Names and Codes (LOINC) is one of the most widely-used terminology standard for laboratory codes in US.</p>
+<p><strong>LOINC</strong></p>
+<p>The LOINC database provides a universal code system for reporting laboratory and other clinical observations. The database currently has over 71,000 observation terms. A LOINC term includes 6 parts: component, kind of property, time aspect, system, type of scale, and type of method. An example of a LOINC code is shown in Table <a href="#tab:Example%20of%20clinical%20LOINC%20terms%20and%20names" data-reference-type="ref" data-reference="tab:Example of clinical LOINC terms and names ">6</a>.</p>
+<p>LOINC has a hierarchical structure. It can be represented as a tree, where each leaf is the LOINC term and the parents are LOINC parts whose codes begin with LP. For example, LP14559-6 stands for <em>Bacteria</em>). A visualization of such structure can be browsed in <a href="https://loinc.org/tree/" class="uri">https://loinc.org/tree/</a>.</p>
+<table class="table">
+<caption>Table 7: Example of LOINC term body weight</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 18%">
+<col style="width: 14%">
+<col style="width: 18%">
+<col style="width: 15%">
+<col style="width: 9%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Component</th>
+<th>Property</th>
+<th>Time Aspect</th>
+<th>System</th>
+<th>Scale</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>29463-7</td>
+<td>Body weight</td>
+<td>Mass</td>
+<td>Pt</td>
+<td>ˆ Patient</td>
+<td>Qn</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Component indicates what is measured, evaluated, or observed. Property indicates characteristics of what is measured. Time aspect indicates interval of time over which the observation or measurement was made. Pt means point in time. System indicates context or specimen type within which the observation was made, e.g.&nbsp;blood or urine. Scale indicates the scale of measure. Qn means quantitative. Method indicates the procedure used to make the measurement or observation. :::</p>
+</section>
+</section>
+<section id="aggregation-of-codified-data" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="aggregation-of-codified-data"><span class="header-section-number">1.2</span> Aggregation of codified data</h2>
+<p>Th four major domains of codified data are diagnosis, procedures, lab measurements, and medications. Due to differential coding practices, the same clinical concepts might be represented by distinct clinical codes at different healthcare systems <span class="citation" data-cites="hernandez2009automated abhyankar2012standardizing">(<a href="references.html#ref-hernandez2009automated" role="doc-biblioref">Hernandez et al. 2009</a>; <a href="references.html#ref-abhyankar2012standardizing" role="doc-biblioref">Abhyankar, Demner-Fushman, and McDonald 2012</a>)</span>. For example, acute myocardial infarction (MI) of anterolateral wall and acute MI of the inferolateral wall are separate codes that describe the same concept of MI <span class="citation" data-cites="hong2021clinical">(<a href="references.html#ref-hong2021clinical" role="doc-biblioref">Hong et al. 2021</a>)</span>. To reduce ambiguity and alleviate heterogeneity across different healthcare systems, the individual clinical codes are usually rolled to standarized codes that group low level specific codes <span class="citation" data-cites="hong2021clinical zhou2022multiview">(<a href="references.html#ref-hong2021clinical" role="doc-biblioref">Hong et al. 2021</a>; <a href="references.html#ref-zhou2022multiview" role="doc-biblioref">Zhou et al. 2022</a>)</span>. As discussed previously, ICD codes are often aggregated into PheCodes using the ICD-to-PheCode mapping from PheWAS catalog (<a href="https://phewascatalog.org/phecodes" class="uri">https://phewascatalog.org/phecodes</a>). Procedure codes including CPT-4, HCPCS, ICD-9-PCS, ICD-10-PCS are grouped into clinical classification software (CCS) categories based on the CCS mapping ( <a href="https://www.hcup-us.ahrq.gov/toolssoftware/ccs_svcsproc/ccssvcproc.jsp" class="uri">https://www.hcup-us.ahrq.gov/toolssoftware/ccs_svcsproc/ccssvcproc.jsp</a>). Medication codes are often aggregated and rolled up into ingredient level RxNorm codes. Laboratory measurements can be aggregated into LOINC codes and further grouped into higher level LOINC Parts codes (LP codes) to reflect broader laboratory code concepts by leveraging the LOINC Multiaxial Hierarchy <span class="citation" data-cites="mcdonald2004logical">(<a href="references.html#ref-mcdonald2004logical" role="doc-biblioref">McDonald et al. 2004</a>)</span>.</p>
+</section>
+<section id="ontology-and-unified-medical-language-system-umls" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="ontology-and-unified-medical-language-system-umls"><span class="header-section-number">1.3</span> Ontology and Unified Medical Language System (UMLS)</h2>
+<p>Expert knowledge lies at the core of a medical intelligence system. For example, a doctor would know the proper questions to ask a patient if they want to diagnose a rheumatoid arthritis instead of a simple joint injury. This is also what we expect a medical question answering system would be able to do. A common way to equip machines with knowledge is through a knowledge graph composed of concepts and relations. As the opening part of this tutorial, this section introduces fundamental infrastructures in biomedical informatics, i.e., medical concepts and relations between them, along with the available resources.</p>
+<section id="sec:1.1" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="sec:1.1"><span class="header-section-number">1.3.1</span> Concepts and Relations</h3>
+<p>For beginners in biomedical informatics, it is important to figure out the meaning of <em>concept</em> and <em>relation</em>. Let’s look at an example in our daily life. One day one of your friend feels ill and goes to see a doctor. They say <em>I have a stomachache! It’s killing me!</em> Then, the doctor tries to comfort them by saying <em>Your stomach pain will be okay. It looks like a minor stomach disorder.</em> In this case, we got three medical terms: <em>stomachache</em>, <em>stomach pain</em>, and <em>stomach disorder</em>. Moreover, we can find some connections between these terms:</p>
+<ol type="1">
+<li><p>The terms <em>stomachache</em> and <em>stomach pain</em> refer to the same syndrome (or concept).</p></li>
+<li><p>The disease <em>stomach disorder</em> may cause <em>stomachache</em>.</p></li>
+</ol>
+<p>First, it is obvious that <em>stomachache</em> and <em>stomach pain</em> refer to the same <strong>concept</strong>. Furthermore, with the exception of disease and symptom, every abstract medical entity can be regarded as a concept. They can be procedures, medicine, disorders, mental condition, etc.</p>
+<p>Second, there is a <strong>relation</strong> called <em>may_cause</em> between <em>stomach disorder</em> and <em>stomachache</em>. This enables the doctor to make a diagnosis for your friend according to their symptoms and the relation between symptoms and diseases. Besides, there are a lot of other relations between concepts. For instance, Aspirin could relieve physical pain; Hypertensive disease may cause heart failure. These relations are crucial to biomedical informatics because they can reveal to us how medical concepts interact with each other.</p>
+</section>
+<section id="the-necessity-of-a-unified-coding-system" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="the-necessity-of-a-unified-coding-system"><span class="header-section-number">1.3.2</span> The necessity of a unified coding system</h3>
+<p>In Section <a href="#sec:1.1" data-reference-type="ref" data-reference="sec:1.1">0.1</a>, we take an example from our daily life to help you understand the meaning of concept and relation. However, biomedical informaticsas an exclusively practical subject, derives its resources from various sources, including but not restricted to textbooks, Wikipedia, and electronic health records (EHR). There are thus great challenges to extracting concepts and relations from the resources, as they not only vary in text style and quality, but also in formats and structures. Therefore, we need a giant <strong>dictionary</strong> to help us deal with these problems.</p>
+<p>In the example from the last section, it is obvious that <em>stomachache</em> and <em>stomach pain</em> refer to a same concept. However, if a researcher is dealing with EHRs from 10,000 patients, finding out all the mentions of the same concept will be arduous work because doctors may use various terms to refer to the same disease in their records such as <em>type 2 diabetes</em>, <em>adult-onset diabetes</em>, and <em>diabetes mellitus type 2</em>. Nonetheless, if you have a <strong>dictionary</strong> containing all terms under the same concept, you can find all these mentions easily by direct matching.</p>
+<p>Moreover, in the last section, we mentioned that doctors can make diagnoses according to relations between symptoms and diseases. Similarly, If we can gather large quantities of relations between medical concepts, it will be a great help to many fields of biomedical informatics such as auto-diagnosis and relation extraction. Therefore, we hope the <strong>dictionary</strong> also contains the relations between its concepts.</p>
+<p>Do we have such a comprehensive dictionary? Of course! In the field of biomedical informatics, we call the giant dictionary <strong>a unified coding system</strong>.</p>
+</section>
+<section id="umls-unified-medical-language-system" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="umls-unified-medical-language-system"><span class="header-section-number">1.3.3</span> UMLS: Unified Medical Language System</h3>
+<p>UMLS (Unified Medical Language System)&nbsp; is a large language system that unifies medical concept coding, typing, relations between medical concepts, etc. It is not only a standard, but also a large database. In brief, the UMLS is a comprehensive dictionary containing considerable medical terms and relations between them.</p>
+<p>You can download data and consult the documentation on the UMLS website <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+</section>
+<section id="concepts-as-cuis-in-umls" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="concepts-as-cuis-in-umls"><span class="header-section-number">1.3.4</span> Concepts as CUIs in UMLS</h3>
+<p>It is desirable to have a unique identifier for each concept. In the UMLS, the identifier is called <strong>CUI</strong> (Unique Concept Identifier). The CUI consists of a <em>C</em> followed by several digits such as C0021400 (Influenza).</p>
+<p>As we mentioned in the last section, each concept usually has more than one name or aliases. In the UMLS, we refer to these names or aliases as <strong>String</strong>. Thus, we can say that each CUI usually has more than one string.</p>
+<p>Among all strings under the same concept, there is always a <strong>preferred</strong> string which is seen as a preferred name of the concept. Researchers usually use preferred names to refer to Concepts because CUIs are difficult to recognize by humans.</p>
+<p>All of the CUIs and strings are defined by table <strong>MRCONSO</strong> in the UMLS which contains 4,536,653 concepts with 16,543,671 strings in total. Table&nbsp;<a href="#tab:Identifiers%20in%20UMLS" data-reference-type="ref" data-reference="tab:Identifiers in UMLS">1</a> is an example of a concept with its strings.</p>
+<table class="table">
+<caption>Table 1: An example of CUIs and strings in UMLS</caption>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 41%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept (CUI)</th>
+<th>Preferred string of concept</th>
+<th>All strings of concept</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C0004238</td>
+<td>Atrial Fibrillation</td>
+<td><p>Atrial Fibrillation</p>
+<p>Atrial Fibrillations</p>
+<p>Auricular Fibrillation</p>
+<p>Auricular Fibrillations</p></td>
+</tr>
+</tbody>
+</table>
+<p>Usually, there are some duplicate strings under the same CUI. Make sure you remove the duplication when constructing your own dictionary.</p>
+<p>In addition to CUIs and strings, MRCONSO also provides other information about medical terms, such as language, source vocabularies, types, etc. The MRCONSO is a table of the UMLS, and here&nbsp;<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> is the description of all columns of the table. Here, we only introduce some of them:</p>
+<ol type="1">
+<li><p><strong>CUI</strong>: Unique identifier for concept</p></li>
+<li><p><strong>LAT</strong>: Language of the term</p></li>
+<li><p><strong>STR</strong>: String of the term</p></li>
+<li><p><strong>SUPPRESS</strong>: Suppressible flag, indicating whether the entry is obsolete</p></li>
+</ol>
+<p>With the entries in MRCONSO, we can extract all strings under the same CUI easily.</p>
+</section>
+<section id="relations-in-umls" class="level3" data-number="1.3.5">
+<h3 data-number="1.3.5" class="anchored" data-anchor-id="relations-in-umls"><span class="header-section-number">1.3.5</span> Relations in UMLS</h3>
+<p>Relations between concepts in the UMLS are defined in another table called <strong>MRREL</strong>. Each entry of this table provides a relation between a pair of concepts. Let’s look at the example in table&nbsp;<a href="#tab:relations%20example" data-reference-type="ref" data-reference="tab:relations example">2</a>.</p>
+<table class="table">
+<caption>Table 2: An example of relations in UMLS</caption>
+<thead>
+<tr class="header">
+<th>CUI1</th>
+<th>REL</th>
+<th>CUI2</th>
+<th>RELA</th>
+<th>SUPPRESS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C4707509</td>
+<td>RO</td>
+<td>C0004057</td>
+<td>active_ingredient_of</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<p>Table&nbsp;<a href="#tab:relations%20example" data-reference-type="ref" data-reference="tab:relations example">2</a> presents an entry extracted from the table MRREL (some columns are omitted), which means that <em>C0004057 (Aspirin)</em> is the active ingredient of <em>C4707509 (Aspirin 800mg gastro-resistant oral tablet)</em>. However, the attribute <em>SUPPRESS</em> is <em>O</em>, which means that the entry is probably obsolete. Usually, we only use entries with <em>SUPPRESS</em> = <em>N</em>.</p>
+<p>The official document&nbsp;<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> provides the description of all of the columns in MRREL. We only introduce some of them here:</p>
+<ol type="1">
+<li><p><strong>CUI1/AUI1</strong>: Unique identifier of first concept/atom</p></li>
+<li><p><strong>CUI2/AUI2</strong>: Unique identifier of second concept/atom</p></li>
+<li><p><strong>REL</strong>: Relationship of second concept or atom to first concept or atom</p></li>
+<li><p><strong>RELA</strong>: Additional (more specific) relationship label</p></li>
+<li><p><strong>SUPPRESS</strong>: Suppressible flag, indicating whether the entry is obsolete</p></li>
+</ol>
+<p>The column <strong>RELA</strong> is more frequently used than <strong>REL</strong> because RELA provides much more specific information than REL does. REL only has 13 kinds of sketchy relations such as <em>has a narrower relationship</em> and <em>related and possibly synonymous</em>. On the other hand, RELA provides hundreds of relations such as <em>induces</em>, <em>ingredient_of</em> and <em>isa</em> (is a).</p>
+</section>
+<section id="semantic-types-in-umls" class="level3" data-number="1.3.6">
+<h3 data-number="1.3.6" class="anchored" data-anchor-id="semantic-types-in-umls"><span class="header-section-number">1.3.6</span> Semantic Types in UMLS</h3>
+<p>In the previous section, We discussed concepts (CUIs) and relations provided by the UMLS. The UMLS also provides categories of these concepts and relations between these categories. These categories are called <strong>Semantic Types</strong> and the relations are called <strong>Semantic Relations</strong>. They constitute the <strong>Semantic Network</strong> of the UMLS. The Semantic Network contains 127 semantic types and 54 relationships. Each concept (CUI) may have more than one semantic type.</p>
+<table class="table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 30%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Level 1</th>
+<th>Level 2</th>
+<th>Level 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>Experimental Model of Disease</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Physiologic Function</td>
+<td>Disease or Syndrome</td>
+</tr>
+<tr class="odd">
+<td>Biologic Function</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Cell Function</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Pathologic Function</td>
+<td>Molecular Function</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Organism Function</td>
+</tr>
+</tbody>
+</table>
+<p>Table&nbsp;<a href="#tab:semantic%20hierachy" data-reference-type="ref" data-reference="tab:semantic hierachy">3</a> illustrates the Hierarchy of Semantic Types. The semantic type “Biologic Function” has two children, “Physiologic Function” and “Pathologic Function”, and each of these in turn has several children, too. Each child in the hierarchy is linked to its parent by the “isa” link.</p>
+<p>The relations between Semantic Types are also hierarchical. They are grouped into five major categories, which are themselves relations: “physically related to”, “spatially related to”, “temporally related to”, “functionally related to”, and “conceptually related to”.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-abhyankar2012standardizing" class="csl-entry" role="doc-biblioentry">
+Abhyankar, Swapna, Dina Demner-Fushman, and Clement J McDonald. 2012. <span>“Standardizing Clinical Laboratory Data for Secondary Use.”</span> <em>Journal of Biomedical Informatics</em> 45 (4): 642–50.
+</div>
+<div id="ref-4CE" class="csl-entry" role="doc-biblioentry">
+Brat, Weber, G. A. 2020. <span>“International Electronic Health Record-Derived COVID-19 Clinical Course Profiles: The 4ce Consortium.”</span> <em>Npj Digit. Med. 3, 109 (2020)</em>, August. <a href="https://doi.org/10.1038/s41746-020-00308-0">https://doi.org/10.1038/s41746-020-00308-0</a>.
+</div>
+<div id="ref-hernandez2009automated" class="csl-entry" role="doc-biblioentry">
+Hernandez, Penni, Tanya Podchiyska, Susan Weber, Todd Ferris, and Henry Lowe. 2009. <span>“Automated Mapping of Pharmacy Orders from Two Electronic Health Record Systems to RxNorm Within the STRIDE Clinical Data Warehouse.”</span> In <em>AMIA Annual Symposium Proceedings</em>, 2009:244. American Medical Informatics Association.
+</div>
+<div id="ref-hong2021clinical" class="csl-entry" role="doc-biblioentry">
+Hong, Chuan, Everett Rush, Molei Liu, Doudou Zhou, Jiehuan Sun, Aaron Sonabend, Victor M Castro, et al. 2021. <span>“<span class="nocase">Clinical knowledge extraction via sparse embedding regression (KESER) with multi-center large scale electronic health record data</span>.”</span> <em>NPJ Digital Medicine</em> 4 (1): 1–11.
+</div>
+<div id="ref-realdata-ai" class="csl-entry" role="doc-biblioentry">
+Liu R, Whipple S, Rizzo S. 2021. <span>“Evaluating Eligibility Criteria of Oncology Trials Using Real-World Data and AI.”</span> <em>Nature</em>, April. <a href="https://doi.org/10.1038/s41586-021-03430-5">https://doi.org/10.1038/s41586-021-03430-5</a>.
+</div>
+<div id="ref-mcdonald2004logical" class="csl-entry" role="doc-biblioentry">
+McDonald, Clem, Stan Huff, J Suico, and Kathy Mercer. 2004. <span>“Logical Observation Identifiers Names and Codes (LOINC<span></span>) Users’ Guide.”</span> <em>Indianapolis: Regenstrief Institute</em>.
+</div>
+<div id="ref-icd9-phecode" class="csl-entry" role="doc-biblioentry">
+Wei, Wei-Qi, Lisa Bastarache, Robert Carroll, Joy Marlo, Travis Osterman, Eric Gamazon, Nancy Cox, Dan Roden, and Joshua Denny. 2017. <span>“Evaluating Phecodes, Clinical Classification Software, and ICD-9-CM Codes for Phenome-Wide Association Studies in the Electronic Health Record.”</span> <em>PLOS ONE</em> 12 (July): e0175508. <a href="https://doi.org/10.1371/journal.pone.0175508">https://doi.org/10.1371/journal.pone.0175508</a>.
+</div>
+<div id="ref-icd10-phecode" class="csl-entry" role="doc-biblioentry">
+Wu, Patrick, Aliya Gifford, Xiangrui Meng, Xue Li, Harry Campbell, Tim Varley, Juan Zhao, et al. 2019. <span>“Mapping ICD-10 and ICD-10-CM Codes to Phecodes: Workflow Development and Initial Evaluation.”</span> <em>JMIR Med Inform</em> 7 (4): e14325. <a href="https://doi.org/10.2196/14325">https://doi.org/10.2196/14325</a>.
+</div>
+<div id="ref-zhou2022multiview" class="csl-entry" role="doc-biblioentry">
+Zhou, Doudou, Ziming Gan, Xu Shi, Alina Patwari, Everett Rush, Clara-Lea Bonzel, Vidul A Panickan, et al. 2022. <span>“Multiview Incomplete Knowledge Graph Integration with Application to Cross-Institutional EHR Data Harmonization.”</span> <em>Journal of Biomedical Informatics</em> 133: 104147.
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>The website of the UMLS is <a href="https://www.nlm.nih.gov/research/umls/index.html" class="uri">https://www.nlm.nih.gov/research/umls/index.html</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p><a href="https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.concept_names_and_sources_file_mr/" class="uri">https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.concept_names_and_sources_file_mr/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p><a href="https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.related_concepts_file_mrrel_rrf/" class="uri">https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.related_concepts_file_mrrel_rrf/</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>https://www.fda.gov/drugs/drug-approvals-and-databases/national-drug-code-directory<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>The website of the UMLS is <a href="https://www.nlm.nih.gov/research/umls/index.html" class="uri">https://www.nlm.nih.gov/research/umls/index.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p><a href="https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.concept_names_and_sources_file_mr/" class="uri">https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.concept_names_and_sources_file_mr/</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p><a href="https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.related_concepts_file_mrrel_rrf/" class="uri">https://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.related_concepts_file_mrrel_rrf/</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

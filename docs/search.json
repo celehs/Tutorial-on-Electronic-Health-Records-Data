@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Tutorial on Electronic Health Records Data",
+    "section": "",
+    "text": "The website of the UMLS is https://www.nlm.nih.gov/research/umls/index.html↩︎\nhttps://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.concept_names_and_sources_file_mr/↩︎\nhttps://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.related_concepts_file_mrrel_rrf/↩︎\nhttps://www.fda.gov/drugs/drug-approvals-and-databases/national-drug-code-directory↩︎\nThe website of the UMLS is https://www.nlm.nih.gov/research/umls/index.html↩︎\nhttps://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.concept_names_and_sources_file_mr/↩︎\nhttps://www.ncbi.nlm.nih.gov/books/NBK9685/table/ch03.T.related_concepts_file_mrrel_rrf/↩︎"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Abhyankar, Swapna, Dina Demner-Fushman, and Clement J McDonald. 2012.\n“Standardizing Clinical Laboratory Data for Secondary Use.”\nJournal of Biomedical Informatics 45 (4): 642–50.\n\n\nBrat, Weber, G. A. 2020. “International Electronic Health\nRecord-Derived COVID-19 Clinical Course Profiles: The 4ce\nConsortium.” Npj Digit. Med. 3, 109 (2020), August. https://doi.org/10.1038/s41746-020-00308-0.\n\n\nHernandez, Penni, Tanya Podchiyska, Susan Weber, Todd Ferris, and Henry\nLowe. 2009. “Automated Mapping of Pharmacy Orders from Two\nElectronic Health Record Systems to RxNorm Within the STRIDE Clinical\nData Warehouse.” In AMIA Annual Symposium Proceedings,\n2009:244. American Medical Informatics Association.\n\n\nHong, Chuan, Everett Rush, Molei Liu, Doudou Zhou, Jiehuan Sun, Aaron\nSonabend, Victor M Castro, et al. 2021. “Clinical knowledge extraction via sparse embedding\nregression (KESER) with multi-center large scale electronic health\nrecord data.” NPJ Digital Medicine 4 (1): 1–11.\n\n\nLiu R, Whipple S, Rizzo S. 2021. “Evaluating Eligibility Criteria\nof Oncology Trials Using Real-World Data and AI.”\nNature, April. https://doi.org/10.1038/s41586-021-03430-5.\n\n\nMcDonald, Clem, Stan Huff, J Suico, and Kathy Mercer. 2004.\n“Logical Observation Identifiers Names and Codes\n(LOINC) Users’ Guide.” Indianapolis: Regenstrief\nInstitute.\n\n\nWei, Wei-Qi, Lisa Bastarache, Robert Carroll, Joy Marlo, Travis\nOsterman, Eric Gamazon, Nancy Cox, Dan Roden, and Joshua Denny. 2017.\n“Evaluating Phecodes, Clinical Classification Software, and\nICD-9-CM Codes for Phenome-Wide Association Studies in the Electronic\nHealth Record.” PLOS ONE 12 (July): e0175508. https://doi.org/10.1371/journal.pone.0175508.\n\n\nWu, Patrick, Aliya Gifford, Xiangrui Meng, Xue Li, Harry Campbell, Tim\nVarley, Juan Zhao, et al. 2019. “Mapping ICD-10 and ICD-10-CM\nCodes to Phecodes: Workflow Development and Initial Evaluation.”\nJMIR Med Inform 7 (4): e14325. https://doi.org/10.2196/14325.\n\n\nZhou, Doudou, Ziming Gan, Xu Shi, Alina Patwari, Everett Rush, Clara-Lea\nBonzel, Vidul A Panickan, et al. 2022. “Multiview Incomplete\nKnowledge Graph Integration with Application to Cross-Institutional EHR\nData Harmonization.” Journal of Biomedical Informatics\n133: 104147."
+  }
+]
